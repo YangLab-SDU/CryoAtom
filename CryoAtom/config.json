@@ -1,0 +1,25 @@
+{
+  "UNet_Args":
+    {
+      "batch_size": 5,
+      "stride": 50,
+      "windows_size": 65,
+      "threshold": 0.6
+    },
+  "CryNet_args":
+    {
+      "num_rounds": 3,
+      "repeat_per_residue": 3,
+      "aggressive_repeat": true,
+      "raw_filter": false,
+      "filter_threshold": 50,
+      "mask_threshold": 0.3,
+      "seq_attention_batch_size": -1
+    },
+  "HMM_search":
+    {
+      "confidence_threshold": 25,
+      "Evalue": 0.01,
+      "cpus": 4
+    }
+}
