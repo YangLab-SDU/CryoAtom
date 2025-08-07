@@ -33,7 +33,7 @@ It requires to use conda to manage the Python dependencies, which can be install
 
 Now, you need to clone this Github repository with
 ```
-git clone https://github.com/SBQ-1999/CryoAtom.git
+git clone https://github.com/YangLab-SDU/CryoAtom.git
 ```
 
 **Step 3: Check if the GPU is available**
