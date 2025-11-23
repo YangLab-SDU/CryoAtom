@@ -296,13 +296,13 @@ This project is completely open-source and runs in a local environment, with all
 
 ## Citation
 <span id="citation"></span>
-Su et al, Improved model building for cryo-EM maps using local attention and 3D rotary position embedding, bioRxiv, 2024. [Paper](https://www.biorxiv.org/content/10.1101/2024.11.13.623164v4)
+Paper available in [Nature Structural & Molecular Biology](https://www.nature.com/articles/s41594-025-01713-3). If you use CryoAtom in your research or work, please cite our publication:
 ```
-@article {Su2024CryoAtom,
-	title = {Improved model building for cryo-EM maps using local attention and 3D rotary position embedding},
+@article {Su2025CryoAtom,
+	title = {CryoAtom improves model building for cryo-EM},
 	author = {Baoquan Su, Kun Huang, Zhenling Peng, Alexey Amunts, and Jianyi Yang},
-	journal = {bioRxiv},
-	year = {2024},
-	doi = {10.1101/2024.11.13.623164}
+	journal = {Nature Structural & Molecular Biology},
+	year = {2025},
+	doi = {10.1038/s41594-025-01713-3}
 }
 ```
