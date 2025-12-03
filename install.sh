@@ -17,12 +17,12 @@ if [[ "${is_env_installed}" == "0" ]];then
   echo "Deploying conda environment..."
   cuda_version=$(nvcc --version | grep -oP 'V\K[0-9]+\.[0-9]+')
   cuda_major_version=$(echo $cuda_version | cut -d. -f1)
-  if [ "$cuda_major_version" -ge 11 ]; then
-      echo "Detected CUDA version is above 11"
-      conda env create -f linux.yml
-  else
+  if [ "$cuda_major_version" -lt 11 ]; then
       echo "Detected CUDA version is below 11"
       conda env create -f linux-cu102.yml
+  else
+      echo "Detected CUDA version is above 11"
+      conda env create -f linux.yml
   fi
 else
   echo "Detected an existing CryoAtom environment, exiting installation";
