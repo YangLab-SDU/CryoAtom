@@ -294,6 +294,25 @@ Since the sequence attention module in CryNet takes up most of the time, the abo
 This project is completely open-source and runs in a local environment, with all operations under the user's control. Therefore, CryoAtom ensures privacy and data security.
 </details>
 
+<details>
+<summary><strong>10. What causes CryoAtom to run slowly?</strong></summary>
+<br>
+
+Please check whether the CryoAtom model has been correctly loaded onto the GPU.
+If you are using H-series GPUs (e.g., H200, H100), the CUDA version is typically 12.x. Currently, the CryoAtom environment only supports CUDA 11.x (e.g., A100-series GPUs).
+
+Please first uninstall CryoAtom by running the following command:
+```
+conda remove -n CryoAtom --all
+```
+Then update the Python environment configuration file (linux.yml) to use a newer Python version (Python 3.9 or later) and a PyTorch build that supports CUDA 12.4 or higher.
+
+After updating linux.yml, rerun the following command to reinstall CryoAtom:
+```
+source install.sh
+```
+</details>
+
 ## Citation
 <span id="citation"></span>
 Paper available in [Nature Structural & Molecular Biology](https://www.nature.com/articles/s41594-025-01713-3). If you use CryoAtom in your research or work, please cite our publication:
