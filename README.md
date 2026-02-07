@@ -1,6 +1,8 @@
 # CryoAtom
+## Important Update: 
+We are pleased to pre-release [CryoAtom2](https://github.com/YangLab-SDU/CryoAtom/releases/download/v2.0.0/CryoAtom-2.0.0.zip) for early user access - a more powerful tool for atomic modeling and sequence identification of protein-nucleic acid complexes. The CryoAtom2 source code (CryoAtom-2.0.0.zip) is currently available for download in the Releases section on the right. Its installation and usage are similar to CryoAtom; for details, please refer to the corresponding README.
+
 <a >
-   <img src="https://img.shields.io/badge/CryoAtom-v1.0.0-green">
    <img src="https://img.shields.io/badge/platform-Linux-green">
    <img src="https://img.shields.io/badge/Language-python3-green">
    <img src="https://img.shields.io/badge/licence-MIT-green">
