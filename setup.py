@@ -3,22 +3,22 @@ import sys
 
 from setuptools import setup, find_packages
 
-import CryoAtom
+import CryoAtom2
 
 
 setup(
-    name="CryoAtom",
+    name="CryoAtom2",
     author='Baoquan Su',
     author_email='202217127@mail.sdu.edu.cn',
     entry_points={
         "console_scripts": [
-            "cryoatom = CryoAtom.__main__:main",
+            "cryoatom = CryoAtom2.__main__:main",
         ],
     },
     packages=find_packages(),
     package_data={
-        '': ['./*.json','./utils/*','./utils/*.py','./utils/*.txt' ,'./Unet/*.py', './CryNet/*.py', './checkpoint/*.pth'],
+        '': ['./*.json','./utils/*','./utils/*.py','./utils/*.txt' ,'./RUNet/*.py', './CryoNet/*.py', './checkpoint/*.pth'],
     },
     include_package_data=True,
-    version=CryoAtom.__version__,
+    version=CryoAtom2.__version__,
 )

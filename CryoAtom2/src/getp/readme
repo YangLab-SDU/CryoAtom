@@ -1,0 +1,5 @@
+# To compile the 'getp' program, you will need g++ >= 4.8.5 (suports c++11)
+
+make clean
+make
+

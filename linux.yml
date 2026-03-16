@@ -1,4 +1,4 @@
-name: CryoAtom
+name: CryoAtom2
 channels:
   #  uncomment the four lines below if you are located in China
 #  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
@@ -9,12 +9,12 @@ channels:
   - nvidia
   - conda-forge
 dependencies:
-  - cudatoolkit=11.3.1
+  - python=3.9
   - numpy=1.21.5
-  - python=3.8
-  - pytorch=1.11.0=py3.8_cuda11.3_cudnn8.2.0_0
-  - torchaudio=0.11.0=py38_cu113
-  - torchvision=0.12.0=py38_cu113
+  - cudatoolkit=11.8
+  - pytorch::pytorch=2.1.0=py3.9_cuda11.8_cudnn8.7.0_0
+  - pytorch::torchvision=0.16.0=py39_cu118
+  - pytorch::torchaudio=2.1.0=py39_cu118
   - mkl=2023.0.0
   - tqdm
   - pip
@@ -27,6 +27,11 @@ dependencies:
       - pandas==1.3.5
       - fair-esm==2.0.0
       - pyhmmer==0.7.1
+      - joblib==1.0.1
+      - ptflops==0.6.6
+      - scikit-learn==0.24.0
+      - threadpoolctl==2.2.0
+      - rna-fm==0.2.2
       - openpyxl
 
 

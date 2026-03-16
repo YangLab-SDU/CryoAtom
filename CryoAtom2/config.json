@@ -1,0 +1,27 @@
+{
+  "RUNet_args":
+    {
+      "batch_size": 4,
+      "stride": 50,
+      "windows_size": 65,
+      "ca_threshold": 0.6,
+      "p_threshold": 0.465
+    },
+  "CryoNet_args":
+    {
+      "num_rounds": 3,
+      "repeat_per_residue": 3,
+      "crop_length": 300,
+      "aggressive_repeat": true,
+      "raw_filter": false,
+      "filter_threshold": 50,
+      "mask_threshold": 0.3,
+      "seq_attention_batch_size": -1
+    },
+  "HMM_search":
+    {
+      "confidence_threshold": 25,
+      "Evalue": 1,
+      "cpus": 4
+    }
+}
