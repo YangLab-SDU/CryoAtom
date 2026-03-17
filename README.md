@@ -1,7 +1,5 @@
 # CryoAtom2
 
-## Urgent Update: 
-We release CryoAtom2 (v2.1.0) here, which fixes a critical bug in the previous version (v2.0.0) that could occasionally produce empty results during hmm_search (sequence identification). In addition, the new version introduces support for multi-GPU inference.
 <p align="left">
   <a>
     <img src="https://img.shields.io/badge/CryoAtom-v2.1.0-green">
@@ -19,7 +17,7 @@ CryoAtom2 is a software tool that automatically constructs all-atom models of pr
 For more details on CryoAtom2, please refer to the manuscript.
 
 ## Hardware requirements
-CryoAtom2 requires at least 4GB of disk space for its own weight files plus the weight files of the ESM and RNA-FM language model. It also requires at least 17GB of GPU memory.
+CryoAtom2 requires at least 4GB of disk space for its own weight files plus the weight files of the ESM and RNA-FM language model. It also requires at least 14GB of GPU memory.
 
 ## Installation
 
@@ -285,6 +283,30 @@ Multi-GPU inference is supported starting from CryoAtom `v2.1.0`. Please refer t
 This project is completely open-source and runs in a local environment, with all operations under the user's control. Therefore, CryoAtom2 ensures privacy and data security.
 </details>
 
+## Update history
+
+<details>
+<summary>v2.1.0</summary>
+<br>
+
+- Fixed an bug where `hmm_search` could occasionally return empty identification results.
+- CryoAtom now supports multi-GPU inference.
+</details>
+
+<details>
+<summary>v2.0.0</summary>
+<br>
+
+- Additional support for nucleic acid modeling and identification.
+- Enhanced protein modeling with over 10% absolute increase in model completeness compared with version 1.0.0.
+</details>
+
+<details>
+<summary>v1.0.0</summary>
+<br>
+
+- CryFold has been renamed to CryoAtom, with support for protein modeling and identification.
+</details>
 
 ## Citation
 <span id="citation"></span>
