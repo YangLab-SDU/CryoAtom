@@ -289,7 +289,7 @@ This project is completely open-source and runs in a local environment, with all
 <summary>v2.1.0</summary>
 <br>
 
-- Fixed an bug where `hmm_search` could occasionally return empty identification results.
+- Fixed a bug where `hmm_search` could occasionally return empty identification results.
 - CryoAtom now supports multi-GPU inference.
 </details>
 
