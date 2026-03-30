@@ -1,11 +1,12 @@
 # CryoAtom2
 
 <p align="left">
-  <a>
-    <img src="https://img.shields.io/badge/CryoAtom-v2.1.0-green">
-    <img src="https://img.shields.io/badge/platform-Linux-green">
-    <img src="https://img.shields.io/badge/Language-python3-green">
-    <img src="https://img.shields.io/badge/licence-MIT-green">
+  <img src="https://img.shields.io/badge/CryoAtom-v2.1.0-green">
+  <img src="https://img.shields.io/badge/platform-Linux-green">
+  <img src="https://img.shields.io/badge/Language-python3-green">
+  <img src="https://img.shields.io/badge/licence-MIT-green">
+  <a href="https://colab.research.google.com/github/YangLab-SDU/CryoAtom/blob/master/CryoAtom.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
   </a>
 </p>
 
@@ -17,7 +18,7 @@ CryoAtom2 is a software tool that automatically constructs all-atom models of pr
 For more details on CryoAtom2, please refer to the manuscript.
 
 ## Hardware requirements
-CryoAtom2 requires at least 4GB of disk space for its own weight files plus the weight files of the ESM and RNA-FM language model. It also requires at least 14GB of GPU memory.
+CryoAtom2 requires at least 4GB of disk space for its own weight files plus the weight files of the ESM and RNA-FM language model. It also requires at least 14GB of GPU memory. If you have limited local hardware resources (especially GPU), consider using our [Google Colab notebook](https://colab.research.google.com/github/YangLab-SDU/CryoAtom/blob/master/CryoAtom.ipynb), which provides step-by-step instructions for running CryoAtom2 in the cloud.
 
 ## Installation
 
