@@ -358,15 +358,13 @@ def final_results_to_cif(
 
     return new_final_results
 def BayesCoreect(possible_indices,idx,dists,edge_logits,edge_index,mask2unmask,eps=1e-3):
-    # possible_logits = []
-    # for poi in possible_indices:
-    #     if np.any(edge_index[idx]==mask2unmask[poi]):
-    #         possible_logits.append(edge_logits[idx][edge_index[idx]==mask2unmask[poi]])
-    #     else:
-    #         possible_logits.append(-1)
-    possible_logits = [edge_logits[idx][edge_index[idx]==mask2unmask[poi]] for poi in possible_indices]
-    possible_logits = np.array(possible_logits).flatten()
-    # possible_logits[possible_logits == -1] = np.max(possible_logits)
+    possible_logits = np.array([
+        edge_logits[idx][edge_index[idx] == mask2unmask[poi]][0]
+        if np.any(edge_index[idx] == mask2unmask[poi])
+        else -1.0
+        for poi in possible_indices
+    ], dtype=np.float64)
+    possible_logits[possible_logits == -1] = max(np.max(possible_logits),0.01)
     dist_logits = 1-np.exp(-(1.5/(dists+eps))**6)
     return np.argsort(1-dist_logits*possible_logits)
 def flood_fill(atomc_positions, b_factors,edge_logits,edge_index,mask2unmask,n_c_distance_threshold=2.1, is_nucleotide=False,):

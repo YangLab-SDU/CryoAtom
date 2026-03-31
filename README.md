@@ -11,7 +11,7 @@
 </p>
 
 ## Overview
-CryoAtom2 is a software tool that automatically constructs all-atom models of proteins, nucleic acids, or their complexes from cryo-EM density maps and sequence information. The post-processing program for the final atomic model is modified from [ModelAngelo](https://github.com/3dem/model-angelo).
+CryoAtom2 is an algorithm to automatically construct atomic models for proteins, nucleic acids, and their complexes using cryo-EM density maps and sequence information. The post-processing program for the final atomic model is modified from [ModelAngelo](https://github.com/3dem/model-angelo).
 
 <div align=center><img src="imgs/framework.png" width="80%" height="80%"/></div>
 

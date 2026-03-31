@@ -67,6 +67,8 @@ def cast_dict_to_full(dictionary):
     return dictionary
 
 def init_model(model_class, model_args, state_dict_path: str, device: str) -> nn.Module:
+    if torch.device(device).type == "cuda":
+        torch.cuda.set_device(device)
     model = model_class(**model_args).eval()
     checkpoint = torch.load(state_dict_path, map_location="cpu")
     if "model" not in checkpoint:
@@ -88,6 +90,8 @@ def run_inference(
         dtype: torch.dtype = torch.float32,
 ):
     device = devices[rank_id]
+    if torch.device(device).type == "cuda":
+        torch.cuda.set_device(device)
     input_queue = input_queues[rank_id]
     output_queue = output_queues[rank_id]
     model = init_model(model_class, model_args, state_dict_path, device)
