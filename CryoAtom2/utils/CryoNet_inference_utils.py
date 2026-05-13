@@ -124,7 +124,7 @@ def get_inference_data(complex, grid_data, idxs, seq_emb_masks=None,crop_length=
 def update_complex_gt_frames(
     complex: PNAComplex, update_indices: np.ndarray, update_affines: np.ndarray
 ) -> PNAComplex:
-    complex.rigidgroups_gt_frames[update_indices][:, 0] = update_affines
+    complex.rigidgroups_gt_frames[update_indices, 0] = update_affines
     return complex
 
 

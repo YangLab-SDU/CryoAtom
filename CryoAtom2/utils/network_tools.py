@@ -128,9 +128,9 @@ def Find_trace(data,target,L,voxel_size,global_origin):
 def map_segmentation(image,windows_size:int=64,stride:int=50):
     Z,Y,X = image.shape
     blocks = []
-    for ii in range(0,Z + stride,stride):
-        for jj in range(0,Y + stride,stride):
-            for kk in range(0,X + stride,stride):
+    for ii in range(0,Z,stride):
+        for jj in range(0,Y,stride):
+            for kk in range(0,X,stride):
                 block = image[min(ii,Z-windows_size):min(ii+windows_size,Z),min(jj,Y-windows_size):min(jj+windows_size,Y)
                 ,min(kk,X-windows_size):min(kk+windows_size,X)]
                 blocks.append(block)
@@ -140,9 +140,9 @@ def map_reconstruction(blocks,image_shape,windows_size:int=64,stride:int=50):
     reconstruction = np.zeros(image_shape)
     counts = np.zeros(image_shape)
     image_number = 0
-    for ii in range(0,Z + stride,stride):
-        for jj in range(0,Y + stride,stride):
-            for kk in range(0,X + stride,stride):
+    for ii in range(0,Z,stride):
+        for jj in range(0,Y,stride):
+            for kk in range(0,X,stride):
                 reconstruction[...,min(ii+2,Z-windows_size+2):min(ii+windows_size-2,Z-2),min(jj+2,Y-windows_size+2):min(jj+windows_size-2,Y-2)
                 ,min(kk+2,X-windows_size+2):min(kk+windows_size-2,X-2)] = reconstruction[...,min(ii+2,Z-windows_size+2):min(ii+windows_size-2,Z-2),min(jj+2,Y-windows_size+2):min(jj+windows_size-2,Y-2)
                 ,min(kk+2,X-windows_size+2):min(kk+windows_size-2,X-2)] + blocks[image_number][...,2:-2,2:-2,2:-2]

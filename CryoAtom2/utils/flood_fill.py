@@ -157,8 +157,8 @@ def final_results_to_cif(
     has_sequences = protein_sequences is not None or rna_sequences is not None or dna_sequences is not None
     final_results["aa_logits"][prot_mask] *= math.log(canonical_num_residues,num_prot)
     final_results["aa_logits"][~prot_mask] *= math.log(canonical_num_residues,canonical_num_residues-num_prot)
-    final_results["aa_logits"][prot_mask][...,num_prot:] = -100
-    final_results["aa_logits"][~prot_mask][...,:num_prot] = -100
+    final_results["aa_logits"][prot_mask,num_prot:] = -100
+    final_results["aa_logits"][~prot_mask,:num_prot] = -100
     bfactors = normalize_local_confidence_score(final_results["local_confidence"]) * 100
     backbone_affine = torch.from_numpy(final_results["pred_affines"])
     existence_mask = (
