@@ -1,0 +1,42 @@
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# NOTE: uv.lock and .python-version are committed on purpose so that
+# `uv sync --locked` reproduces the environment exactly.
+
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Editors / IDEs
+.vscode/
+.idea/
+
+# Security scan workspace
+.mimosa/
+
+# checkpoints
+CryoAtom2/checkpoint/*
