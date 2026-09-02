@@ -26,27 +26,36 @@ CryoAtom2 requires at least 4GB of disk space for its own weight files plus the 
 <summary>Install CryoAtom2</summary>
 <br>
 
-**Step 1: Install Conda**
+Choose one of the two options below to set up the environment. Both download the model weight files and the RNA-FM language model weights, and then set up an isolated environment (a conda environment, or a `.venv` virtual environment created by uv).
 
-It requires to use conda to manage the Python dependencies, which can be installed following https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html#regular-installation.
+**Option 1: Install with Conda**
 
-**Step 2: Clone this repository**
-
-Now, you need to clone this Github repository with
+1. **Install conda**, by following the instructions at https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html#regular-installation.
+2. **Clone this repository**:
 ```
 git clone https://github.com/YangLab-SDU/CryoAtom.git
 ```
-
-**Step 3: Install CryoAtom2**
-
-Navigate to the CryoAtom2 installation directory and run the installation script:
-
+3. **Run the installation script**:
 ```
 cd CryoAtom
 source install.sh
 ```
 
-**Step 4: Compile the Mean-Shift Algorithm (Optional)**
+**Option 2: Install with uv**
+
+1. **Install uv**, a fast Python package and environment manager, with `pip install uv`.
+2. **Clone this repository**:
+```
+git clone https://github.com/YangLab-SDU/CryoAtom.git
+```
+3. **Run the installation script**:
+```
+cd CryoAtom
+source install-uv.sh
+```
+The uv installer creates a `.venv` virtual environment, installs the CUDA 11.8 builds of PyTorch 2.1.0 from the [PyTorch wheel index](https://download.pytorch.org/whl/cu118), and syncs all dependencies pinned in `pyproject.toml` through the committed `uv.lock` file (`uv sync --locked`).
+
+**Compile the Mean-Shift Algorithm (Optional, both options)**
 
 If you encounter an error `Segmentation fault (core dumped)` when running Stage 1 of CryoAtom2, please execute this step; otherwise, you can skip it. This step recompiles the mean-shift algorithm to ensure compatibility across different systems. To guarantee successful compilation, please make sure that your `g++` version is at least `4.8.5`, and then run the following commands:
 
@@ -62,6 +71,13 @@ cryoatom build -h
 ```
 
 to check if the installation was successful.
+
+**Note on activating the environment**
+
+In a new terminal, activate the environment before running `cryoatom`:
+
+- With **Conda**: `conda activate CryoAtom2`
+- With **uv**: `source .venv/bin/activate`
 <br>
 </details>   
     
@@ -180,6 +196,7 @@ Just delete the cloned repository directory from GitHub and uninstall the CryoAt
 ```
 conda remove -n CryoAtom2 --all
 ```
+(If you installed with uv, remove the virtual environment with `rm -rf .venv` instead.)
 Then simply follow the installation process to install it again.
 
 </details>
