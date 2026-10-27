@@ -14,7 +14,7 @@ def save_mrc(grid, voxel_size, origin, filename):
     o.update_header_stats()
     o.flush()
     o.close()
-def load_map(mrc_fn:str,multiply_global_origin:bool=True):
+def load_map(mrc_fn:str):
     mrc_file=mrc.open(mrc_fn,'r')
     voxel_size=mrc_file.voxel_size
     voxel_size=np.array([voxel_size.x,voxel_size.y,voxel_size.z])
@@ -30,9 +30,7 @@ def load_map(mrc_fn:str,multiply_global_origin:bool=True):
     temp_start = np.zeros(3)
     for temp_index in range(3):
         temp_start[temp1[temp_index]] = nstart[temp_index]
-    global_origin = global_origin + temp_start
-    if multiply_global_origin:
-        global_origin = global_origin * voxel_size
+    global_origin = global_origin + temp_start * voxel_size  # nstart is in voxels; the header origin is already in A
     if c == 1 and r == 2 and s == 3:
         grid = mrc_file.data
     elif c == 1 and r == 3 and s == 2:

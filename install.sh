@@ -44,6 +44,13 @@ then
 fi
 
 python_exc="${CONDA_PREFIX}/bin/python"
+
+$python_exc setup.py install
+
+cd "$SCRIPT_DIR/CryoAtom2/RUNet" || exit 1
+getp_dir=$($python_exc -c "import CryoAtom2,os; print(os.path.join(os.path.dirname(CryoAtom2.__file__),'utils','getp'))")
+chmod +x $getp_dir
+
 TORCH_HUB_DIR=$("$python_exc" -c "import torch; print(torch.hub.get_dir())")
 MODEL_RNALLM_PATH="$TORCH_HUB_DIR/checkpoints/RNA-FM_pretrained.pth"
 MODEL_RNALLM_URL="https://yanglab.qd.sdu.edu.cn/CryoAtom/download/RNA-FM_pretrained.pth"
@@ -65,9 +72,4 @@ if [ ! -s "$MODEL_RNALLM_PATH" ] || [ "$MODEL_RNALLM_SIZE" -ne 1194424423 ]; the
 
     mv "$TMP_RNALLM_PATH" "$MODEL_RNALLM_PATH"
 fi
-$python_exc setup.py install
-
-cd "$SCRIPT_DIR/CryoAtom2/RUNet" || exit 1
-getp_dir=$($python_exc -c "import CryoAtom2,os; print(os.path.join(os.path.dirname(CryoAtom2.__file__),'utils','getp'))")
-chmod +x $getp_dir
 echo "done!"

@@ -209,6 +209,8 @@ def infer(args):
         atom_grid["CA"],threshold=atom_threshs['CA'],cluster_threshold=1.1,neighbour_distance_threshold=6/np.min(voxel_size)
     )
     atom_positions['CA'] = output_ca_points * voxel_size[None] + global_origin[None]
+    # the P training labels were voxelized by truncation, so the predicted P points sit about 0.4 A low on every axis
+    atom_positions['P'] = atom_positions['P'] + 0.4
     ca_ps_to_pdb(model_output_dir,atom_positions['CA'],atom_positions['P'])
 
     # output_ca_points, output_ca_points_before_pruning = grid_to_points(

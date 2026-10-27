@@ -23,6 +23,7 @@ from CryoAtom2.utils.hmm_sequence_align import (
     prune_and_connect_chains,
     get_aa_from_aalogits
 )
+from CryoAtom2.utils.na_sequence_align import na_align_input
 from CryoAtom2.utils.save_pdb_utils import chain_atomc_to_cif, number_to_chain_str, write_chain_report, \
     write_chain_probabilities
 from CryoAtom2.utils.PNAComplex import (
@@ -153,6 +154,7 @@ def final_results_to_cif(
     # prot_mask_change = prot_mask_change[...,:num_prot].sum(axis=-1)
     # prot_mask[prot_mask_change<0.1] = False
     # prot_mask[prot_mask_change>0.9] = True
+    local_confidence = final_results["local_confidence"].copy()  # the network's values, used by the NA aligner
     final_results["local_confidence"][~prot_mask] = shift_score(final_results["local_confidence"][~prot_mask])
     has_sequences = protein_sequences is not None or rna_sequences is not None or dna_sequences is not None
     final_results["aa_logits"][prot_mask] *= math.log(canonical_num_residues,num_prot)
@@ -274,6 +276,7 @@ def final_results_to_cif(
                 )
     if has_sequences:
         ca_pos = all_atoms_np[:, 1]
+        na_align = na_align_input(all_atoms_np, aatype, local_confidence[existence_mask], chains) if end_flag else None
 
         fix_chains_output = fix_chains_pipeline(
             prot_sequences=protein_sequences,
@@ -284,6 +287,7 @@ def final_results_to_cif(
             ca_pos=ca_pos,
             chain_prot_mask=new_final_results["chain_prot_mask"],
             base_dir=os.path.dirname(cif_path),
+            na_align=na_align,
         )
 
         chain_all_atoms, chain_atom_mask, chain_bfactors, chain_aa_probs = chains_to_atoms(

@@ -12,7 +12,6 @@ from numpy import ndarray
 from scipy.spatial import KDTree
 
 from CryoAtom2.utils.misc_utils import assertion_check
-from CryoAtom2.utils.residue_constants import restype_3_to_index
 
 
 class MatchToSequence:
@@ -153,18 +152,7 @@ class MatchToSequence:
                 and not self.is_nucleotide[chain_id]
             ) or len(chains[chain_id]) < chain_prune_length:
                 continue
-            if aggressive_pruning and np.sum(
-                self.exists_in_sequence_mask[chain_id] > 0.5
-            ) < chain_prune_length <= len(chains[chain_id]):
-                # In this case, we keep the chain but mutate the residues to N
-                new_sequences.append(
-                    np.full((len(self.new_sequences[chain_id]),), fill_value=restype_3_to_index["N"], dtype=np.int64)
-                )
-                residue_idxs.append(np.arange(len(self.new_sequences[chain_id])))
-                exists_in_sequence_mask.append(self.exists_in_sequence_mask[chain_id])
-                new_chains.append(chains[chain_id])
-
-            elif aggressive_pruning and not self.is_nucleotide[chain_id]:
+            if aggressive_pruning and not self.is_nucleotide[chain_id]:
                 new_sequences.append(
                     self.new_sequences[chain_id][
                         self.exists_in_sequence_mask[chain_id].astype(bool)

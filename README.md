@@ -1,7 +1,7 @@
 # CryoAtom2
 
 <p align="left">
-  <img src="https://img.shields.io/badge/CryoAtom-v2.1.0-green">
+  <img src="https://img.shields.io/badge/CryoAtom-v2.2.0-green">
   <img src="https://img.shields.io/badge/platform-Linux-green">
   <img src="https://img.shields.io/badge/Language-python3-green">
   <img src="https://img.shields.io/badge/licence-MIT-green">
@@ -285,6 +285,15 @@ This project is completely open-source and runs in a local environment, with all
 </details>
 
 ## Update history
+
+<details>
+<summary>v2.2.0</summary>
+<br>
+
+- Improved nucleic acid sequence alignment by incorporating confidence scores and secondary structure constraints, achieving over 6% absolute increase in model completeness on the benchmark dataset, particularly in base-paired regions.
+- Fixed a systematic positional offset in the P atoms predicted by Stage 1.
+- Fixed the placement of maps whose position is stored in the MRC header origin (for example maps written by ChimeraX or cryoSPARC).
+</details>
 
 <details>
 <summary>v2.1.0</summary>

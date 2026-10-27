@@ -50,7 +50,7 @@ def infer(args):
         raise RuntimeError(f"File {args.struct} is not a supported file format.")
     grid_data = None
     if args.map_path.endswith("map") or args.map_path.endswith("mrc"):
-        grid, voxel_size, global_origin = load_map(args.map_path, multiply_global_origin=True)
+        grid, voxel_size, global_origin = load_map(args.map_path)
         grid, voxel_size, global_origin = make_model_grid(
             grid,
             voxel_size,

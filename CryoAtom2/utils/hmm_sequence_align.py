@@ -25,6 +25,7 @@ from CryoAtom2.utils.fasta_utils import (
     nuc_sequence_to_purpyr,
 )
 from CryoAtom2.utils.match_to_sequence import MatchToSequence
+from CryoAtom2.utils.na_sequence_align import align_na_fragments, split_chains_at_jumps
 from CryoAtom2.utils.residue_constants import num_prot, restype_3_to_index
 
 HMMAlignment = namedtuple(
@@ -218,6 +219,7 @@ def best_match_to_sequences(
     chain_aa_logits: List[np.ndarray],
     base_dir: str = "/tmp",
     do_pp: bool = True,
+    na_align=None,
 ) -> MatchToSequence:
     alphabets = [
         pyhmmer.easel.Alphabet.amino(),
@@ -249,9 +251,12 @@ def best_match_to_sequences(
         is_nucleotide_list,
     ) = ([], [], [], [], [], [], [], [], [])
     null_sequence_id = sum([len(d) for d in digital_sequences])
-    for aa_logits, prot_mask in zip(
+    na_alignments = {} if na_align is None else align_na_fragments(
+        chain_aa_logits, chain_prot_mask, prot_sequences, rna_sequences, dna_sequences, na_align
+    )
+    for chain_id, (aa_logits, prot_mask) in enumerate(zip(
         chain_aa_logits, chain_prot_mask
-    ):
+    )):
         chain_len = len(aa_logits)
         is_nucleotide = np.all(~prot_mask)
         if chain_len < 3:
@@ -266,7 +271,7 @@ def best_match_to_sequences(
             exists_in_sequence_mask.append(np.ones(chain_len, dtype=int))
             is_nucleotide_list.append(is_nucleotide)
         else:
-            hmm_alignment = get_hmm_alignment(
+            hmm_alignment = na_alignments.get(chain_id) or get_hmm_alignment(
                 aa_logits,
                 digital_prot_sequences=digital_sequences[0],
                 digital_rna_sequences=digital_sequences[1],
@@ -562,6 +567,7 @@ def fix_chains_pipeline(
     ca_pos: np.ndarray,
     chain_prot_mask: List[np.ndarray],
     base_dir: str = "/tmp",
+    na_align=None,
 ) -> FixChainsOutput:
     """
     What you actually want is to get the smallest sum for the distance as well as the gap
@@ -581,7 +587,10 @@ def fix_chains_pipeline(
         chain_aa_logits=chain_aa_logits,
         chain_prot_mask=chain_prot_mask,
         base_dir=base_dir,
+        na_align=na_align,
     )
+    if na_align is not None:
+        chains = split_chains_at_jumps(chains, best_match_output)
     chains = best_match_output.remove_duplicates(chains, ca_pos)
     chains, best_match_output = sort_chains(best_match_output, chains, ca_pos,)
     chains, best_match_output = sort_chains_by_match(chains, best_match_output)
