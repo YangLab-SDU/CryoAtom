@@ -87,10 +87,10 @@ def hmmer_search(input_dir:str,fasta_database:str,raw_fasta=None,output_dir=None
     for (hits,name) in tqdm.tqdm(zip(all_hits,[name for name,hmm in hmms])):
         for hit in hits:
             if hit.evalue < Evalue:
-                hits_csv["target_name"].append(hit.name.decode("utf-8"))
+                hits_csv["target_name"].append(_to_str(hit.name))
                 hits_csv["query_name"].append(name[0])
                 hits_csv["query_len"].append(name[1])
-                hits_csv["accession"].append(hit.accession.decode("utf-8") if hit.accession else "")
+                hits_csv["accession"].append(_to_str(hit.accession) if hit.accession else "")
                 hits_csv["E-value"].append(hit.evalue)
                 hits_csv["score"].append(hit.score)
                 hits_csv["bias"].append(hit.bias)
@@ -120,13 +120,13 @@ def hmmer_search(input_dir:str,fasta_database:str,raw_fasta=None,output_dir=None
             filtered_df.to_csv(os.path.join(output_dir, f"best_hits_{alphabet}.csv"), index=False)
     out_seq_list = []
     sequences = list(sequences)
-    new_seq_list = {seq.name.decode('utf-8'): seq for seq in sequences}
+    new_seq_list = {_to_str(seq.name): seq for seq in sequences}
     if raw_fasta:
         raw_seq_list = SeqIO.parse(raw_fasta, "fasta")
         for sss in raw_seq_list:
             out_seq_list.append(sss)
     new_seq_list = [new_seq_list[cn] for cn in find_new_seq_name]
     for sss2 in new_seq_list:
-        out_seq_list.append(SeqRecord(Seq(sss2.sequence),id=sss2.name.decode("utf-8"),description=_to_str(sss2.description)))
+        out_seq_list.append(SeqRecord(Seq(sss2.sequence),id=_to_str(sss2.name),description=_to_str(sss2.description)))
     SeqIO.write(out_seq_list, os.path.join(output_dir,f'{os.path.basename(base_dir)}_{alphabet}.fasta'), "fasta")
     return os.path.join(output_dir, f"new_hits_{alphabet}.xlsx"),os.path.join(output_dir,f'{os.path.basename(base_dir)}_{alphabet}.fasta')
